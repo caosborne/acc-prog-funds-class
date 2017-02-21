@@ -1,25 +1,34 @@
-
-
 # 1. Input the number of eggs collected on each day of the week for the seven days of the week. You must use a loop to do this
 #     a. In the input, you must say the name of the day as shown in the sample output
 #         i. To do this you will use a selection within the loop. You will NOT have seven unique input statements. It will be one statement repeated 7 times with the loop iterations
 eggsTotal = 0
-weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+# weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
 # 3. Ensure that Farmer Suzy does not enter any value less than 55 or greater than
 # 550 for the number of eggs collected each day
 # a. This requirement is based on the assumption that each chicken lays at
 # least one egg per day and no chicken lays more than 10 eggs per day
-for i in range(len(weekdays)):
-    # print(weekdays[i])
-    dailyEggs = int(input('How many eggs did you collect on ' + weekdays[i] + '?'))
-    if dailyEggs < 55 or dailyEggs > 550:
-        # do something
-        print('There needs to be more than 55 and less 550 eggs per day!')
-        continue
-    else:
-        eggsTotal += dailyEggs
+for day in days:
+        dailyEggs = int(input('How many eggs did you collect on ' + day + '? '))
+        while dailyEggs < 55 or dailyEggs > 550:
+            dailyEggs = int(input('Please enter a valid number for ' + day + ':( 55 <-> 550 ) '))
+        else:
+            eggsTotal += dailyEggs
+
+# for i in range(len(weekdays)):
+#     # print(weekdays[i])
+#     dailyEggs = int(input('How many eggs did you collect on ' + weekdays[i] + '?'))
+#     if dailyEggs < 55 or dailyEggs > 550:
+#         # do something
+#         print('There needs to be more than 55 and less 550 eggs per day!')
+#         # continue
+#     else:
+#         eggsTotal += dailyEggs
+
+
 # 2. You will input the road Farmer Suzy will take to the Farmer’s Market.
-route = input('What route would you like to take today? Enter M for Mountain or R for River.')
+route = input('What route would you like to take today? Enter M for Mountain or R for River: ')
 routeMiles = 0
 if route == 'm':
     routeMiles += 15.13
