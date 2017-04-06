@@ -69,18 +69,35 @@ def main():
 
 
 def richterValues():
-    # richter is the Richter scale measurement
-    # (typically on a scale from 1-10 as a floating point number).
-    print(format('Richter', '<20'),format('Joules', '^20'), format('TNT', '>20'))
-    print(' ')
-    print(format('6.5', '<20'),format(10 ** (( 1.5 * 6.5 ) + 4.8 ), '^20'), format((10 ** (( 1.5 * 6.5 ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>28'))
-    print(format('9.5', '<20'),format(10 ** (( 1.5 * 9.5 ) + 4.8 ), '^20'), format((10 ** (( 1.5 * 9.5 ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>28'))
-    print(format('5', '<20'),format(10 ** (( 1.5 * 5 ) + 4.8 ), '^20'), format((10 ** (( 1.5 * 5 ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>28'))
-    print(format('2', '<20'),format(10 ** (( 1.5 * 2 ) + 4.8 ), '^20'), format((10 ** (( 1.5 * 2 ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>28'))
-    print(format('7.5', '<20'),format(10 ** (( 1.5 * 7.5 ) + 4.8 ), '^20'), format((10 ** (( 1.5 * 7.5 ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>28'))
-    print(' ')
-    print('=========================================================')
-    print(' ')
+    try:
+        infile = open('richters1.txt', 'r')
+        richterValues = infile.readlines()
+        infile.close()
+
+        # create a loop that iterates through the list to make them floats.
+        i = 0
+        while i < len(richterValues):
+            richterValues[i] = float(richterValues[i].rstrip('\n'))
+            i += 1
+
+        richterValues = sorted(richterValues)
+
+        # richter is the Richter scale measurement
+        # (typically on a scale from 1-10 as a floating point number).
+        print(format('Richter', '<20'),format('Joules', '^20'), format('TNT', '>20'))
+        print(' ')
+        n = 0
+        while n < len(richterValues):
+            print(format(richterValues[n], '<20'),format(10 ** (( 1.5 * richterValues[n] ) + 4.8 ), '^20'), format((10 ** (( 1.5 * richterValues[n] ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>28' ))
+            print(richterValues[n] + '\t',(10 ** (( 1.5 * richterValues[n] ) + 4.8 ) + '\t'), (10 ** (( 1.5 * richterValues[n] ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000  + '\t')
+            n += 1
+        print(' ')
+        print('=========================================================')
+        print(' ')
+
+        outfile = open('earthquakesChristopherOsborne.txt', 'w')
+    except IOError:
+        print('An error occurred trying to read the input file. Please try again!')
 
 def greetingMessage():
     # Greeting message to user
@@ -89,8 +106,11 @@ def greetingMessage():
     print(' ')
 
 def inputRichter():
-    richterScale = float(input('How big do you think that was on the Richter Scale? (Usually a Richter Scale is measured from 1-10) '))
-    return richterScale
+    try:
+        richterScale = float(input('How big do you think that was on the Richter Scale? (Usually a Richter Scale is measured from 1-10) '))
+        return richterScale
+    except ValueError:
+        print('Error! Please input a number and not the literal saying of a number.')
 
 def richterComments(num):
     if num <= 4:
