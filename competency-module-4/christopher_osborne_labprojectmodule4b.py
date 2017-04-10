@@ -38,14 +38,14 @@ def main():
 
     print('Now the final table.')
     print(' ')
-    print('\t'.join(headings))
-    print('\t'.join(southwest))
-    print('\t'.join(jetBlue))
-    print('\t'.join(alaska))
-    print('\t'.join(delta))
-    print('\t'.join(united))
-    print('\t'.join(american))
-    print('\t'.join(spirit))
+    print('\t\t'.join(headings))
+    print('\t\t'.join(southwest))
+    print('\t\t'.join(jetBlue))
+    print('\t\t'.join(alaska))
+    print('\t\t'.join(delta))
+    print('\t\t'.join(united))
+    print('\t\t'.join(american))
+    print('\t\t'.join(spirit))
 
 
 main()

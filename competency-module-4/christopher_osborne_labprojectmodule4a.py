@@ -70,7 +70,7 @@ def main():
 
 def richterValues():
     try:
-        infile = open('richters1.txt', 'r')
+        infile = open('richters.txt', 'r')
         richterValues = infile.readlines()
         infile.close()
 
@@ -84,18 +84,26 @@ def richterValues():
 
         # richter is the Richter scale measurement
         # (typically on a scale from 1-10 as a floating point number).
-        print(format('Richter', '<20'),format('Joules', '^20'), format('TNT', '>20'))
+        print(format('Richter', '<20'),format('Joules', '^25'), format('TNT', '>25'))
         print(' ')
+        richterOutput = []
+        richterOutput.append('Richter')
+        richterOutput.append('Joules')
+        richterOutput.append('TNT')
+
         n = 0
         while n < len(richterValues):
-            print(format(richterValues[n], '<20'),format(10 ** (( 1.5 * richterValues[n] ) + 4.8 ), '^20'), format((10 ** (( 1.5 * richterValues[n] ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>28' ))
-            print(richterValues[n] + '\t',(10 ** (( 1.5 * richterValues[n] ) + 4.8 ) + '\t'), (10 ** (( 1.5 * richterValues[n] ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000  + '\t')
+            conversions = print(format(richterValues[n], '<20'),format(10 ** (( 1.5 * richterValues[n] ) + 4.8 ), '^25'), format((10 ** (( 1.5 * richterValues[n] ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>30' ))
+            richterOutput.append(str(conversions))
+
             n += 1
         print(' ')
         print('=========================================================')
         print(' ')
 
         outfile = open('earthquakesChristopherOsborne.txt', 'w')
+        outfile.write('\n'.join(richterOutput))
+        outfile.close()
     except IOError:
         print('An error occurred trying to read the input file. Please try again!')
 
