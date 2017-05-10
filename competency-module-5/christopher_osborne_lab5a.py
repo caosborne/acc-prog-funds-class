@@ -2,7 +2,7 @@ def main():
 
     # richter is the Richter scale measurement
     # (typically on a scale from 1-10 as a floating point number).
-    # richterValues()
+    richterValues()
 
     # Greeting message to user
     greetingMessage()
@@ -27,52 +27,47 @@ def main():
             print('  ')
             counter += 1
         else:
+            nameAndEmail()
+            print(' ')
             # There needs to be parameters with prints that same some comment
                 # 1-4 "You call that an earthquake?"
                 # 5-8 "That's not a earthquake"
                 # 9-10 "Now that's an earthquake!"
-            # richterComments(richterScale)
+            richterComments(richterScale)
 
             # create a variable with the equation of energy(joules) and explodedTNT
             energy = energyCalc(richterScale)
             explodedTNT = explodedTNTCalc(energy)
-            energy = str(energy)
-            explodedTNT = str(explodedTNT)
             # print the results from the variables set of the equations for energy(joules) and explodedTNT
             # check these outputs with the website given in instructions to confirm they're correct
             # print the value the user input and then run the measurements
-            richterScale = str(richterScale)
-            # print('A Richter Scale value of ' + richterScale + ' results in the following: ')
-            # print('     In joules: ' + energy)
-            # print('     Tons of TNT exploded: ' + explodedTNT)
-            #
-            # print(' ')
-            # print('=========================================================')
-            # print(' ')
-            richterStrings = [' ', '=========================================================', ' ', 'A Richter Scale value of ' + richterScale + ' results in the following: ', '     In joules: ' + energy, '     Tons of TNT exploded: ' + explodedTNT]
+            print('A Richter Scale value of ', richterScale, ' results in the following: ')
+            print('     In joules: ', energy)
+            print('     Tons of TNT exploded: ', explodedTNT)
 
-            richterValues(richterStrings)
+            print(' ')
+            print('=========================================================')
+            print(' ')
 
             # print the same message from above letting the user know what richter scale measuremen they chose and now let them know this will be in scientific notation
-            # print('A Richter Scale value of ', richterScale, ' results in the following fancy scientific notation: ')
+            print('A Richter Scale value of ', richterScale, ' results in the following fancy scientific notation: ')
 
             # set variables for the energy and explodedTNT variables but in scientific notation
                 # To indicate scientific notation in Python, use the format specifier.
                 # Example: print(format(354813389233576.06, ‘.2e’))
-            # energySN = scientificNotationEnergy(energy)
-            # explodedTNT_SN = scientificNotationTNT(explodedTNT)
+            energySN = scientificNotationEnergy(energy)
+            explodedTNT_SN = scientificNotationTNT(explodedTNT)
 
             # print the results from the scientific notation and confirm they're correct with same website as before.
-            # print('     In joules: ', energySN)
-            # print('     Tons of TNT exploded: ', explodedTNT_SN)
+            print('     In joules: ', energySN)
+            print('     Tons of TNT exploded: ', explodedTNT_SN)
+            print(' ')
+            print('************ A copy has been emailed to you! ************')
             break
     else:
         print('Clearly the earthquake rattled your brain and you have entered an incorrect Richter Scale value 3 times. Goodbye!')
 
-
-
-
-def richterValues(strings):
+def richterValues():
     try:
         infile = open('richters.txt', 'r')
         richterValues = infile.readlines()
@@ -88,44 +83,55 @@ def richterValues(strings):
 
         # richter is the Richter scale measurement
         # (typically on a scale from 1-10 as a floating point number).
-        richterOutput = []
+        print(format('Richter', '<20'),format('Joules', '^25'), format('TNT', '>25'))
+        print(' ')
+        # richterOutput = []
+        # richterOutput.append('Richter')
+        # richterOutput.append('Joules')
+        # richterOutput.append('TNT')
 
         n = 0
         while n < len(richterValues):
-            conversions = richterValues[n], 10 ** (( 1.5 * richterValues[n] ) + 4.8 ), (10 ** (( 1.5 * richterValues[n] ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000
-            # conversions = str(conversions)
-            # conversions = list(conversions)
-            # print(conversions)
-            richterOutput.append(conversions)
-            # richterOutput.append(strings)
-            # richterOutput = conversions
+            conversions = print(format(richterValues[n], '<20'),format(10 ** (( 1.5 * richterValues[n] ) + 4.8 ), '^25'), format((10 ** (( 1.5 * richterValues[n] ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>30' ))
+            # richterOutput.append(str(conversions))
 
             n += 1
-            # print(conversions)
+        print(' ')
+        print('=========================================================')
+        print(' ')
 
-        # print(richterOutput + strings)
-        # print(richterOutput)
-        # print(' ')
-        # print(strings)
-        richterOutput = list(richterOutput)
-        richterOutputConcat = richterOutput + strings
-        # richterOutputConcat = str(richterOutputConcat)
-
-        print(richterOutputConcat)
-        outfile = open('earthquakesChristopherOsborne.txt', 'w')
-        # richterOutput = list(richterOutput)
-        # print(richterOutput)
-        # for item in richterOutput:
-        #     richterOutput = list(item)
-            # outfile.write(item + '\n')
-        # richterOutput = str(richterOutput)
-        # print(richterOutput)
-        outfile.write(str(richterOutputConcat))
+        # outfile = open('earthquakesChristopherOsborne.txt', 'w')
         # outfile.write('\n'.join(richterOutput))
-        # outfile.write('\t'.join(conversions))
-        outfile.close()
+        # outfile.close()
     except IOError:
         print('An error occurred trying to read the input file. Please try again!')
+
+def nameAndEmail():
+    counter = 0
+    while counter < 10000000000000000:
+        name = str(input("Please input your full name: "))
+        email = str(input("Please input your email: "))
+        # print(email.find('@'))
+        at = email.find('@')
+        period = email.find('.')
+        if len(name) < 5:
+            print('  ')
+            print('That is not a valid full length name!')
+            print('Please try putting in your correct full name.')
+            print('  ')
+            counter += 1
+        elif email.find('@') and email.find('.') == -1:
+            print('  ')
+            print('That is not a valid email address!')
+            print('Please try putting in your correct email address.')
+            print('  ')
+            counter += 1
+        else:
+            return
+            # Need to use email.find('@') to see if the user input the @ symbol
+            # Also need to search the email[::-1] which should reverse the string then you need to search 3-4 characters forward to see if there is a . / if no . then plus 1 to counter and print letting them know to input a real email address
+            # once this has been completed return it to the main code and print the results of the original input of the richter value they entered.
+
 
 def greetingMessage():
     # Greeting message to user

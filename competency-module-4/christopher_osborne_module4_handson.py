@@ -5,22 +5,23 @@ def main():
     i = 0
     while i < 11:
         # Strip the list of the end of line markers or the "\n"
-        numbers.append(i)
+        numbers.append(str(i))
         i += 1
     print(numbers)
-    # outfile = open('christopherOsborneNumbers.txt', 'w')
+    outfile = open('christopherOsborneNumbers.txt', 'w')
     for num in numbers:
-
-    n = 0
-    while n < len(numbers):
-        numbers = str(numbers[n]) + '\n'
+        numbers = num + '\n'
+        # theNum = 0
+        # while theNum < len(numbers):
+        #     numbers = str(numbers[theNum]) + '\n'
         print(numbers)
-    # outfile.close()
-    print(numbers)
+        outfile.write(numbers)
+    outfile.close()
+    # print(numbers)
 
 main()
 
-# This was written first and I struggled with it so I tried the easier one which is ^^^^. 
+# This was written first and I struggled with it so I tried the easier one which is ^^^^.
 
 # def main():
 #     try:
