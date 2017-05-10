@@ -128,10 +128,6 @@ def nameAndEmail():
             counter += 1
         else:
             return
-            # Need to use email.find('@') to see if the user input the @ symbol
-            # Also need to search the email[::-1] which should reverse the string then you need to search 3-4 characters forward to see if there is a . / if no . then plus 1 to counter and print letting them know to input a real email address
-            # once this has been completed return it to the main code and print the results of the original input of the richter value they entered.
-
 
 def greetingMessage():
     # Greeting message to user
