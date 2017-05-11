@@ -69,9 +69,6 @@ def main():
     else:
         print('Clearly the earthquake rattled your brain and you have entered an incorrect Richter Scale value 3 times. Goodbye!')
 
-
-
-
 def richterValues(strings):
     try:
         infile = open('richters.txt', 'r')
@@ -124,6 +121,31 @@ def richterValues(strings):
         # outfile.write('\n'.join(richterOutput))
         # outfile.write('\t'.join(conversions))
         outfile.close()
+    except IOError:
+        print('An error occurred trying to read the input file. Please try again!')
+
+# 1 All the other things get carried over from the previous lab except calculating and writing the table
+# 2 Read the values from the richters.txt file into a list using the readlines() method
+# 3 Sort the list using the sort method for example mylist.sort()
+# 4 Create a new list using for example newlist = []
+# 5 append all the values you read from the file into newlist
+# 6 then in a loop for example for value in newlist:
+# 7 read each value; calculate the joules and TNT; and write it to the output file
+def richterValues(strings):
+    try:
+        infile = open('richters.txt', 'r')
+        richterValues = infile.readlines()
+        infile.close()
+
+        # create a loop that iterates through the list to make them floats.
+        i = 0
+        while i < len(richterValues):
+            richterValues[i] = float(richterValues[i].rstrip('\n'))
+            i += 1
+
+        richterValues = sorted(richterValues)
+
+
     except IOError:
         print('An error occurred trying to read the input file. Please try again!')
 
