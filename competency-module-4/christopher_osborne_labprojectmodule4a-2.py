@@ -1,9 +1,4 @@
 def main():
-
-    # richter is the Richter scale measurement
-    # (typically on a scale from 1-10 as a floating point number).
-    richterValues()
-
     # Greeting message to user
     greetingMessage()
 
@@ -33,42 +28,20 @@ def main():
                 # 9-10 "Now that's an earthquake!"
             richterComments(richterScale)
 
-            # print the value the user input and then run the measurements
-            print('A Richter Scale value of ', richterScale, ' results in the following: ')
-
-            # create a variable with the equation of energy(joules) and explodedTNT
             energy = energyCalc(richterScale)
             explodedTNT = explodedTNTCalc(energy)
 
-            # print the results from the variables set of the equations for energy(joules) and explodedTNT
-            # check these outputs with the website given in instructions to confirm they're correct
-            print('     In joules: ', energy)
-            print('     Tons of TNT exploded: ', explodedTNT)
+            firstLine = '========================================================='
+            secondLine = 'You entered ' + str(richterScale) + ' and a Richter Scale value of ' + str(richterScale) + ' results in the following: '
+            thirdLine = '     In joules: ' + str(energy)
+            fourthLine = '     Tons of TNT exploded: ' + str(explodedTNT)
 
-            print(' ')
-            print('=========================================================')
-            print(' ')
-
-            # print the same message from above letting the user know what richter scale measuremen they chose and now let them know this will be in scientific notation
-            print('A Richter Scale value of ', richterScale, ' results in the following fancy scientific notation: ')
-
-            # set variables for the energy and explodedTNT variables but in scientific notation
-                # To indicate scientific notation in Python, use the format specifier.
-                # Example: print(format(354813389233576.06, ‘.2e’))
-            energySN = scientificNotationEnergy(energy)
-            explodedTNT_SN = scientificNotationTNT(explodedTNT)
-
-            # print the results from the scientific notation and confirm they're correct with same website as before.
-            print('     In joules: ', energySN)
-            print('     Tons of TNT exploded: ', explodedTNT_SN)
+            richterValues(firstLine, secondLine, thirdLine, fourthLine)
             break
     else:
         print('Clearly the earthquake rattled your brain and you have entered an incorrect Richter Scale value 3 times. Goodbye!')
 
-
-
-# 1 All the other things get carried over from the previous lab except calculating and writing the table
-def richterValues():
+def richterValues(one, two, three, four):
     try:
         # 2 Read the values from the richters.txt file into a list using the readlines() method
         infile = open('richters.txt', 'r')
@@ -85,40 +58,18 @@ def richterValues():
             newList.append(float(richterValues[i].rstrip('\n')))
             i += 1
 
-        print(newList)
-        print()
+        outfile = open('earthquakesChristopherOsborne2.txt', 'a')
+        
+        value = 0
+        for value in newList:
+           richter = value
+           energy = energyCalc(richter)
+           eTNT = explodedTNTCalc(richter)
 
+           outfile.write(str(richter) + '\t\t\t\t' + str(energy) + '\t\t\t\t' + str(eTNT) + '\n' + '\n')
 
-        n = 0
-        while n < len(newList):
-            newList.append(newList[n])
-            newList.append(10 ** (( 1.5 * newList[n] ) + 4.8 ))
-            newList.append((10 ** (( 1.5 * newList[n] ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000)
-            # newList2 = float(newList[n]), 10 ** (( 1.5 * float(newList[n]) ) + 4.8 ), (10 ** (( 1.5 * float(newList[n]) ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000
-
-            # newList.append(newList11)
-            # newList.append(newList22)
-            # newList.append(newList33)
-            n += 1
-
-        # 6 then in a loop for example for value in newlist:
-
-        print(newList)
-        # 7 read each value; calculate the joules and TNT; and write it to the output file
-
-        # richter is the Richter scale measurement
-        # (typically on a scale from 1-10 as a floating point number).
-        # print(format('Richter', '<20'),format('Joules', '^20'), format('TNT', '>20'))
-        # print(' ')
-        # print(format('6.5', '<20'),format(10 ** (( 1.5 * 6.5 ) + 4.8 ), '^20'), format((10 ** (( 1.5 * 6.5 ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>28'))
-        # print(format('9.5', '<20'),format(10 ** (( 1.5 * 9.5 ) + 4.8 ), '^20'), format((10 ** (( 1.5 * 9.5 ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>28'))
-        # print(format('5', '<20'),format(10 ** (( 1.5 * 5 ) + 4.8 ), '^20'), format((10 ** (( 1.5 * 5 ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>28'))
-        # print(format('2', '<20'),format(10 ** (( 1.5 * 2 ) + 4.8 ), '^20'), format((10 ** (( 1.5 * 2 ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>28'))
-        # print(format('7.5', '<20'),format(10 ** (( 1.5 * 7.5 ) + 4.8 ), '^20'), format((10 ** (( 1.5 * 7.5 ) + 4.8 ) * (2.390057361377 * 10 ** -7)) / 1000, '>28'))
-        print(' ')
-        print('=========================================================')
-        print(' ')
-
+        outfile.write(one + '\n' + two + '\n' + three + '\n' + four)
+        outfile.close()
     except IOError:
         print('An error occurred trying to read the input file. Please try again!')
 
@@ -162,6 +113,5 @@ def scientificNotationEnergy(num):
 def scientificNotationTNT(num):
     explodedTNT_SN = format(num, '.2e')
     return explodedTNT_SN
-
 
 main()
